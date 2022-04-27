@@ -1,10 +1,10 @@
-   OBJECTS = loader.o kernel/kmain.o drivers/screen.o drivers/io.o 
+   OBJECTS = loader.o kernel/kmain.o drivers/screen.o drivers/io.o gdt/gdtload.o gdt/gdt.o
    C_SOURCES = $(wildcard kernel/*.c)
    HEADERS = $(wildcard kernel/*.h)
    OBJ = ${C_SOURCES:.c=.o} 
 
     CC = gcc
-    CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
+    CFLAGS = -m32 -fno-builtin -fno-stack-protector \
              -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
     LDFLAGS = -T link.ld -melf_i386
     AS = nasm
@@ -44,13 +44,19 @@
 
     kernel/kmain.o: kernel/kmain.c
 	$(CC) $(CFLAGS)  $< -o $@
-
+		
+    gdt/gdt.o: gdt/gdt.c gdt/gdtload.h 
+	$(CC) $(CFLAGS)  $< -o $@
+	
+    gdt/gdtload.o: gdt/gdtload.s gdt/gdtload.h 
+	$(AS) $(ASFLAGS) $< -o $@
+		
     drivers/screen.o: drivers/screen.c drivers/screen.h
 	$(CC) $(CFLAGS)  $< -o $@
 
     drivers/io.o: drivers/io.s drivers/io.h 
 	$(AS) $(ASFLAGS) $< -o $@
-
+		
     %.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
 
