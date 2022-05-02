@@ -1,4 +1,4 @@
-   OBJECTS = loader.o kernel/kmain.o drivers/screen.o drivers/io.o gdt/gdtload.o gdt/gdt.o
+   OBJECTS = loader.o kernel/kmain.o drivers/screen.o drivers/io.o gdt/gdtload.o gdt/gdt.o idt/idtload.o idt/idt.o
    C_SOURCES = $(wildcard kernel/*.c)
    HEADERS = $(wildcard kernel/*.h)
    OBJ = ${C_SOURCES:.c=.o} 
@@ -44,6 +44,12 @@
 
     kernel/kmain.o: kernel/kmain.c
 	$(CC) $(CFLAGS)  $< -o $@
+	
+    idt/gdt.o: idt/idt.c idt/idtload.h 
+	$(CC) $(CFLAGS)  $< -o $@
+	
+    idt/idtload.o: idt/idtload.s idt/idtload.h 
+	$(AS) $(ASFLAGS) $< -o $@
 		
     gdt/gdt.o: gdt/gdt.c gdt/gdtload.h 
 	$(CC) $(CFLAGS)  $< -o $@
