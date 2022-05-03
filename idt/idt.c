@@ -12,6 +12,20 @@ void i686_IDT_SetGate(int interrupt, void* base, uint16_t segmentDescriptor, uin
     g_IDT[interrupt].BaseHigh = ((uint32_t)base >> 16) & 0xFFFF;
 }
 
+
+
+void IDT_SetGATE(int interrupt, void* base)
+{
+    g_IDT[interrupt].BaseLow = ((uint32_t)base) & 0xFFFF;
+    g_IDT[interrupt].SegmentSelector = 0x08;
+    g_IDT[interrupt].Reserved = 0;
+    g_IDT[interrupt].Flags = 0x8E;
+    g_IDT[interrupt].BaseHigh = ((uint32_t)base >> 16) & 0xFFFF;
+}
+
+
+
+
 void i686_IDT_EnableGate(int interrupt)
 {
     FLAG_SET(g_IDT[interrupt].Flags, IDT_FLAG_PRESENT);

@@ -1,4 +1,4 @@
-   OBJECTS = loader.o kernel/kmain.o drivers/screen.o drivers/io.o gdt/gdtload.o gdt/gdt.o idt/idtload.o idt/idt.o
+   OBJECTS = loader.o kernel/kmain.o drivers/screen.o drivers/io.o util/tools.o gdt/gdtload.o gdt/gdt.o idt/idtload.o idt/idt.o idt/isrload.o idt/isr.o
    C_SOURCES = $(wildcard kernel/*.c)
    HEADERS = $(wildcard kernel/*.h)
    OBJ = ${C_SOURCES:.c=.o} 
@@ -45,7 +45,13 @@
     kernel/kmain.o: kernel/kmain.c
 	$(CC) $(CFLAGS)  $< -o $@
 	
-    idt/gdt.o: idt/idt.c idt/idtload.h 
+    idt/isr.o: idt/isr.c idt/isr.h 
+	$(CC) $(CFLAGS)  $< -o $@
+	
+    idt/isrload.o: idt/isr.s idt/isr.h 
+	$(AS) $(ASFLAGS) $< -o $@
+		
+    idt/idt.o: idt/idt.c idt/idtload.h 
 	$(CC) $(CFLAGS)  $< -o $@
 	
     idt/idtload.o: idt/idtload.s idt/idtload.h 
@@ -56,6 +62,9 @@
 	
     gdt/gdtload.o: gdt/gdtload.s gdt/gdtload.h 
 	$(AS) $(ASFLAGS) $< -o $@
+	
+    util/tools.o: util/tools.c util/tools.h
+	$(CC) $(CFLAGS)  $< -o $@
 		
     drivers/screen.o: drivers/screen.c drivers/screen.h
 	$(CC) $(CFLAGS)  $< -o $@
