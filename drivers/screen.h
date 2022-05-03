@@ -1,3 +1,4 @@
+
 #define MAX_ROWS 25
 #define MAX_COLS 80
 #define WHITE_ON_BLUE 0x1f

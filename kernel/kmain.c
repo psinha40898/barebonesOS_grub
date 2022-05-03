@@ -1,8 +1,7 @@
 #include "../drivers/screen.h"
-#include "../drivers/io.h"
 #include "../gdt/gdtload.h"
-#include "../idt/idtload.h"
 #include "../idt/isr.h"
+#include "../drivers/keyboard.h"
 
 #include <stdint.h>
 
@@ -17,10 +16,10 @@ char *fb = (char *) 0x000B8000;
 fb[0] = 'N';
 fb[1] = 0x28;
 move_cursor(90);
-  
-   __asm__ __volatile__("int $2");
-   __asm__ __volatile__("int $3");
-  
+      asm volatile("sti");
+
+    init_keyboard();
+
 
 kprint("TEST3");
 

@@ -1,4 +1,4 @@
-   OBJECTS = loader.o kernel/kmain.o drivers/screen.o drivers/io.o util/tools.o gdt/gdtload.o gdt/gdt.o idt/idtload.o idt/idt.o idt/isrload.o idt/isr.o
+   OBJECTS = loader.o kernel/kmain.o drivers/screen.o drivers/io.o util/tools.o gdt/gdtload.o gdt/gdt.o idt/idtload.o idt/idt.o idt/isrload.o idt/isr.o drivers/keyboard.o
    C_SOURCES = $(wildcard kernel/*.c)
    HEADERS = $(wildcard kernel/*.h)
    OBJ = ${C_SOURCES:.c=.o} 
@@ -43,6 +43,9 @@
                     
 
     kernel/kmain.o: kernel/kmain.c
+	$(CC) $(CFLAGS)  $< -o $@
+	
+    drivers/keyboard.o: drivers/keyboard.c drivers/keyboard.h 
 	$(CC) $(CFLAGS)  $< -o $@
 	
     idt/isr.o: idt/isr.c idt/isr.h 

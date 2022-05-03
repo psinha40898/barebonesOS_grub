@@ -57,7 +57,7 @@ typedef enum
 
 
 void i686_GDT_Initialize();
-void i686_GDT_Load(GDTDescriptor* descriptor, unsigned short int codeSegment, unsigned short int dataSegment);
+void i686_GDT_Load(GDTDescriptor* descriptor, uint16_t codeSegment, uint16_t dataSegment);
 
 #endif /* INCLUDE_IO_H */
 
