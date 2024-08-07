@@ -54,7 +54,7 @@ void kprint(char *message) {
     kprint_at(message, -1, -1);
 }
 
-void kmove_down() {
+void kmove_enter() {
     // Get the current cursor position
     int offset = get_cursor_offset();
     
@@ -82,7 +82,7 @@ void kmove_down() {
     // Move to the next row
     
     // Compute the new offset for the cursor
-    offset = get_offset(col, row);
+    offset = get_offset(0, row);
     set_cursor_offset(offset);
     
     // Move the cursor to the new position

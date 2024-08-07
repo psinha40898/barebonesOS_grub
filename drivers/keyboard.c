@@ -95,7 +95,7 @@ void print_letter(uint8_t scancode) {
 			kprint("]");
 			break;
 		case 0x1C:
-			kmove_down();
+			kmove_enter();
 			break;
 		case 0x1D:
 			kprint("LCtrl");
@@ -193,7 +193,7 @@ void print_letter(uint8_t scancode) {
             } else if (scancode <= 0x39 + 0x80) {
                 // kprint("key up ");
                 // print_letter(scancode - 0x80);
-            } else kprint("Unknown key up");
+            } else print_letter(scancode - 0x80);
             break;
     }
 }

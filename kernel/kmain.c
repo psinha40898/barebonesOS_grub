@@ -14,7 +14,7 @@ int main(void)
   // char *fb = (char *) 0x000B8000;
   // // fb[0] = 'N';
   // // fb[1] = 0x28;
-  move_cursor(90);
+  // move_cursor(90);
   asm volatile("sti");
   init_keyboard();
 
