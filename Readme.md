@@ -1,4 +1,10 @@
 <h1>A very basic x86 operating system</h1>
+
+
+https://github.com/user-attachments/assets/df95e90e-635f-46bc-b431-99466e14a592
+
+
+
 <ul>
 <li>GRUB bootloader loads custom kernel</li>
 <li>Keyboard and Screen drivers defined to interact with appropriate Framebuffer memory locations</li>
@@ -14,16 +20,16 @@
 <pre><code>
 sudo apt-get update
 
-# Install GCC and related tools
+// Install GCC and related tools
 sudo apt-get install gcc g++ nasm binutils
 
-# Install multilib support
+// Install multilib support
 sudo apt-get install gcc-multilib g++-multilib
 
-# Install ISO creation tools
+// Install ISO creation tools
 sudo apt-get install genisoimage mkisofs
 
-# Install QEMU
+// Install QEMU
 sudo apt-get install qemu-system-x86
 </code></pre>
 
