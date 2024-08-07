@@ -1,7 +1,8 @@
 <h1>A very basic x86 operating system</h1>
 
 
-https://github.com/user-attachments/assets/df95e90e-635f-46bc-b431-99466e14a592
+
+https://github.com/user-attachments/assets/25484a09-4374-40f7-b81c-e717ebfef27a
 
 
 
