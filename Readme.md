@@ -9,7 +9,24 @@
 </ul>
 
 
+
 <h2>How to Run</h2>
+<pre><code>
+sudo apt-get update
+
+# Install GCC and related tools
+sudo apt-get install gcc g++ nasm binutils
+
+# Install multilib support
+sudo apt-get install gcc-multilib g++-multilib
+
+# Install ISO creation tools
+sudo apt-get install genisoimage mkisofs
+
+# Install QEMU
+sudo apt-get install qemu-system-x86
+</code></pre>
+
 <p>To build the project and create the ISO image, follow these steps:</p>
 <ol>
   <li>Run <code>make</code> to compile the kernel and build the ISO image:</li>
