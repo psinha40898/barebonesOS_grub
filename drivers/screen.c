@@ -54,6 +54,73 @@ void kprint(char *message) {
     kprint_at(message, -1, -1);
 }
 
+void kmove_down() {
+    // Get the current cursor position
+    int offset = get_cursor_offset();
+    
+    // Compute the current row and column from the offset
+    int row = get_offset_row(offset);
+    int col = get_offset_col(offset);
+    if (col == 0 && row > 0) {
+        // Move to the end of the previous line
+        // row--;
+        // // Calculate column as the end of the previous line
+        // col = get_offset_col(get_offset(0, row + 1)) - 1;
+        row++;
+        col--;
+    } else if (col > 0) {
+        // Move one character back
+        row++;
+        col--;
+    } else {
+        // If at the start of the line and row is 0, there's nothing to delete
+        row++;
+        col--;
+        return;
+    }
+
+    // Move to the next row
+    
+    // Compute the new offset for the cursor
+    offset = get_offset(col, row);
+    set_cursor_offset(offset);
+    
+    // Move the cursor to the new position
+   
+}
+
+void kdelete_char() {
+    // Get the current cursor position
+    int offset = get_cursor_offset();
+    
+    // Compute the current row and column from the offset
+    int row = get_offset_row(offset);
+    int col = get_offset_col(offset);
+
+    // Check if we are at the beginning of the line
+    if (col == 0 && row > 0) {
+        // Move to the end of the previous line
+        row--;
+        // Calculate column as the end of the previous line
+        col = get_offset_col(get_offset(0, row + 1)) - 1;
+    } else if (col > 0) {
+        // Move one character back
+        col--;
+    } else {
+        // If at the start of the line and row is 0, there's nothing to delete
+        return;
+    }
+    
+    // Compute the new offset for the cursor
+    offset = get_offset(col, row);
+    
+    // Clear the character at the new offset
+    print_char(' ', col, row, WHITE_ON_BLUE);
+    
+    // Update the cursor position to the new offset
+    set_cursor_offset(offset);
+}
+
 /*END*/
 int print_char(char c, int col, int row, char attr) {
     unsigned char *vidmem = (unsigned char*) VIDEO_ADDRESS;

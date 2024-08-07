@@ -53,7 +53,7 @@ void print_letter(uint8_t scancode) {
             kprint("+");
             break;
         case 0x0E:
-            kprint("Backspace");
+            kdelete_char();
             break;
         case 0x0F:
             kprint("Tab");
@@ -95,7 +95,7 @@ void print_letter(uint8_t scancode) {
 			kprint("]");
 			break;
 		case 0x1C:
-			kprint("ENTER");
+			kmove_down();
 			break;
 		case 0x1D:
 			kprint("LCtrl");
@@ -182,17 +182,17 @@ void print_letter(uint8_t scancode) {
             kprint("LAlt");
             break;
         case 0x39:
-            kprint("Spc");
+            kprint(" ");
             break;
         default:
             /* 'keuyp' event corresponds to the 'keydown' + 0x80 
              * it may still be a scancode we haven't implemented yet, or
              * maybe a control/escape sequence */
             if (scancode <= 0x7f) {
-                kprint("Unknown key down");
+                // kprint("Unknown key down");
             } else if (scancode <= 0x39 + 0x80) {
-                kprint("key up ");
-                print_letter(scancode - 0x80);
+                // kprint("key up ");
+                // print_letter(scancode - 0x80);
             } else kprint("Unknown key up");
             break;
     }
@@ -203,11 +203,11 @@ static void keyboard_callback(registers_t regs) {
     uint8_t scancode = inb(0x60);
     char *sc_ascii = NULL;
     int_to_ascii(scancode, sc_ascii);
-    kprint("Keyboard scancode: ");
-    kprint(sc_ascii);
-    kprint(", ");
+    // kprint("Keyboard scancode: ");
+    // kprint(sc_ascii);
+    // kprint(", ");
     print_letter(scancode);
-    kprint("\n");
+    // kprint("\n");
 }
 void init_keyboard() {
    register_interrupt_handler(IRQ1, keyboard_callback); 

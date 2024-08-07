@@ -6,6 +6,8 @@
 #define VIDEO_ADDRESS 0xb8000
 
 void clear_screen();
+void kdelete_char();
+void kmove_down();
 void move_cursor(unsigned short pos);
 void kprint_at(char *message, int col, int row);
 void kprint(char *message);
